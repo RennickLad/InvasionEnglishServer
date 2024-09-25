@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<div class="container">
+    <%# Writing %>
+    <%= render @writing %>
+
+    <div>
+        <%# Links %>
+        <%= link_to "Edit this writing", edit_writing_path(@writing) %> |
+        <%= link_to "Back to writings", writings_path %>
+
+        <%# Delete Button %>
+        <%= button_to "Destroy this writing", @writing, method: :delete %>
+    </div>
+<div>

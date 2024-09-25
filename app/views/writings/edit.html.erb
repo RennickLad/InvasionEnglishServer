@@ -1,0 +1,14 @@
+<div class="container">
+    <% content_for :title, "Editing writing" %>
+    <h1>Editing writing</h1>
+
+    <%# Writing Form %>
+    <%= render "form", writing: @writing %>
+    <br>
+
+    <%# Links %>
+    <div>
+        <%= link_to "Show this writing", @writing %> |
+        <%= link_to "Back to writings", writings_path %>
+    </div>
+<div>
