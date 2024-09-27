@@ -1,9 +1,10 @@
 class WritingsController < ApplicationController
     before_action :set_writing, only: %i[ show edit update destroy ]
+    before_action :authenticate_user!, except: %i[ show index ]
 
     # GET /writings or /writings.json
     def index
-        @writings = Writing.all
+        @writings = Writing.all.order(created_at: :desc)
     end
 
     # GET /writings/1 or /writings/1.json
@@ -22,6 +23,7 @@ class WritingsController < ApplicationController
     # POST /writings or /writings.json
     def create
         @writing = Writing.new(writing_params)
+        @writing.user = current_user
 
         respond_to do |format|
             if @writing.save
