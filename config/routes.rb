@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     get "users/profile"
     get "/u/:id", to: "users#profile", as: "user"
 
-    resources :writings
+    resources :writings do
+      resources :corrections
+    end
 
     devise_for :users, controllers: {
         sessions: "users/sessions",
