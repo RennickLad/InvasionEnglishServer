@@ -2,15 +2,38 @@
     <%# User %>
     <%= correction.user.name %><br />
 
-    <%# Time when Posted %>
-    <span>Posted <%= time_ago_in_words(correction.created_at) %></span>
+    <%# Time when Posted or Updated %>
+    <% if (correction.updated_at - correction.created_at) > 1 %>
+        <span>Edited <%= time_ago_in_words(correction.updated_at) %> ago</span>
+    <% else %>
+        <span>Posted <%= time_ago_in_words(correction.created_at) %> ago</span>
+    <% end %>
 
-    <%# Delete Button %>
     <% if current_user == correction.user %>
-        <%= button_to "Delete", [writing, correction], class: "btn btn-danger", method: :delete %>
+        <div class= "btn-group float-end">
+            <%# Edit Button %>
+            <%= link_to "Edit", nil, remote: true, class: "btn btn-warning",
+                data: {
+                    controller: "corrections",
+                    action: "corrections#toggleForm",
+                    corrections_form_param: "edit-form-#{correction.id}",
+                    corrections_body_param: "correction-body-#{correction.id}"
+                }
+            %>
+
+            <%# Delete Button %>
+            <%= button_to "Delete", [writing, correction], class: "btn btn-danger", method: :delete %>
+        </div>
+
+        <%# Edit Form %>
+        <div id= "edit-form-<%= correction.id %>" class= "d-none">
+            <%= render "corrections/form", writing: @writing, correction: correction, submit_label: "Update" %>
+        </div>
     <% end %>
 
     <%# Correction %>
     <hr />
-    <%= correction.body %>
+    <div id= "correction-body-<%= correction.id %>">
+        <%= correction.body %>
+    </div>
 </div>
