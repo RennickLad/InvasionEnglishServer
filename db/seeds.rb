@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+User.create(email: "Rennlad@example.com", password: "password", password_confirmation: "password")
+
 10.times do |x|
-    Writing.create(body: "This is writing #{x}!!!!!")
+    Writing.create(body: "This is writing #{x}!!!!!", user_id: User.first.id)
 end

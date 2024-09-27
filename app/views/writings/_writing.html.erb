@@ -1,4 +1,6 @@
 <div id="<%= dom_id writing %>">
+    <%# Author %>
+    <h4>Submitted by <%= link_to writing.user.name, user_path(writing.user) %></h4>
 
     <%# Body %>
     <p>
