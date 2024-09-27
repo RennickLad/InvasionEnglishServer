@@ -13,7 +13,7 @@
     <br />
 
     <%# Correction Form %>
-    <%= render 'corrections/form', writing: @writing %>
+    <%= render 'corrections/form', writing: @writing, correction: @writing.corrections.build, submit_label: "Reply" %>
 
     <%# Corrections %>
     <% @corrections.each do |correction| %>
